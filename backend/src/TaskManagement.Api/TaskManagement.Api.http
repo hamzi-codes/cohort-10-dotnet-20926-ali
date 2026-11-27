@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:5014
+
+### Health
+GET {{baseUrl}}/health
+
+### Register
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Test User",
+  "email": "test@example.com",
+  "password": "Passw0rd!"
+}
+
+### Login
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "Passw0rd!"
+}
+
+### Tasks (requires token)
+GET {{baseUrl}}/api/tasks
+Authorization: Bearer {{login.response.body.token}}
+
+### Dashboard summary
+GET {{baseUrl}}/api/tasks/summary
+Authorization: Bearer {{login.response.body.token}}
